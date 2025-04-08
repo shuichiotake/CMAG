@@ -1,6 +1,6 @@
 import sys
 sys.path.append("../../packages/")
-a
+
 import functions as func
 import itertools
 import matplotlib.pyplot as plt
