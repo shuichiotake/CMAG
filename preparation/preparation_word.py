@@ -5,7 +5,7 @@ from multiprocessing import Pool
 import numpy as np
 import pickle
 import time    
-
+a
 # -- load
 
 with open("../data/sentence_embedding.pkl", "rb") as f:
