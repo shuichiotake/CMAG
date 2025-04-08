@@ -6,7 +6,7 @@ import pickle
 import scipy.linalg
 from scipy.stats import norm
 from sympy import *
-
+a
 # -- load
 
 with open("../data/sentence_embedding.pkl", "rb") as f:
