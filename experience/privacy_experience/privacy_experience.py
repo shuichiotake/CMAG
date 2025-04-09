@@ -206,7 +206,7 @@ for k in knd:
             embds_100 = s_embd[covering[X[i]]]
             for m in range(0,100):
                 np.random.seed(m + 100* residue[para] + 5000*i + nums[k])
-                per_vec = embd_mat[i] + func.Mahalanobis(sd,sigma_mat)
+                per_vec = s_embd[i] + func.Mahalanobis(sd,sigma_mat)
                 A = embds_100 - per_vec
                 B = A*A
                 C = B.sum(1)
