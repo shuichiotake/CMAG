@@ -50,8 +50,9 @@ sd_dict = {"CMAG":sd_CMAG, "MAG": sd_MAG, "CMAG(E)": sd_CMAG_E, "Laplacian": sd_
 parameters = [8*i/5 for i in range(1,26)]
 residue = {e : round(5*e/8) for e in parameters}
 nums = {"CMAG" : 0, "MAG" : 0, "Mahalanobis" : 0, "Laplacian" : 0, "CMAG(E)": 0}
-s1 = "Ns_{}"
+s1 = "Ns_Ss_{}"
 s2 = "Ns_{}_{:.2f}"
+s3 = "Ss_{}_{:.2f}"
 
 #Add noise to all sentences 100 times.
 
@@ -273,7 +274,7 @@ for k in knd:
             Y = main()
         Ss_para = {5 : Y[round(num_of_sent*5/100)-1], 50 : Y[round(num_of_sent*50/100)-1], 95 : Y[round(num_of_sent*95/100)-1]}
         result_Ss[k][e] = Ss_para
-        with open("./results/" + str(s4.format(k,e)) + ".pkl", "wb") as f:
+        with open("./results/" + str(s3.format(k,e)) + ".pkl", "wb") as f:
             pickle.dump(Ss_para,f)
             
 #Generate graphs for Ns and Ss.
