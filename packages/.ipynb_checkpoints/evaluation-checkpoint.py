@@ -2,8 +2,8 @@
 Add Gaussian noise to sentence embeddings and evaluate the embeddings on downstream tasks
 """
 
-PATH_SENTEVAL = '../../SentEval'
-PATH_TO_DATA = '../../SentEval/data'
+PATH_SENTEVAL = '../SentEval'
+PATH_TO_DATA = '../SentEval/data'
 
 import sys
 sys.path.insert(0, PATH_SENTEVAL)
