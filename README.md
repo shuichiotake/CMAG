@@ -34,7 +34,6 @@ Only environment under Anaconda3 (VER:conda 23.1.0:linux-64) is tested.
    The pickle data evaluation_result_.pkl will be crated in the directory /experience/benchmark_experience/results/ and the graphs SST2.png, SUBJ.png, TREC.png, CR.png, MR.png,
    MRPC.png, STSBenchmark.png, SICKEntailment.png will be created in the directory /experience/benchmark_experience/graphs/.
 
-   Note that the benchmark_experience.py is on the test mode in default, and please download SentEval(https://github.com/facebookresearch/SentEval) and place it under the directory /experience/benchmark/. Also, please erase # on the lines 1, 2, 5, 6, 10, 115, 116, 139, 140, 165, 166, 189, 190, 214, 215, 248--252, 266--268 in benchmark_experience.py for the actual thing.
  
 # Authors
  
