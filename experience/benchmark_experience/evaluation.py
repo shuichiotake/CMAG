@@ -65,5 +65,5 @@ class Eval(object):
         res = se.eval(all_tasks)
         print(knd, e)
         s = "evaluation_result_{}_{:.2f}"
-        with open("/home/otake/Sentence-DP/CMAG/experience/benchmark_experience/results/" + str(s.format(knd,e)) + ".pkl", "wb") as f:
+        with open("./results/" + str(s.format(knd,e)) + ".pkl", "wb") as f:
             pickle.dump(res,f)
