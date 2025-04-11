@@ -1,13 +1,13 @@
-#PATH_SENTEVAL = './SentEval'
-#PATH_TO_DATA = './SentEval/data'
+PATH_SENTEVAL = '../../SentEval'
+PATH_TO_DATA = '../../SentEval/data'
 
 import sys
-#sys.path.insert(0, PATH_SENTEVAL)
-#import senteval
+sys.path.insert(0, PATH_SENTEVAL)
+import senteval
 
 sys.path.append("../../packages/")
 
-#from evaluation import *
+from evaluation import *
 import functions as func
 import itertools
 import logging
@@ -87,6 +87,8 @@ sd_dict = {"CMAG":sd_CMAG, "MAG": sd_MAG, "CMAG(E)": sd_CMAG_E, "Laplacian": sd_
 parameters = [8*i/5 for i in range(1,26)]
 residue = {e : round(5*e/8) for e in parameters}
 noised_mat_dict = dict()
+num_of_sent = s_embd.shape[0]
+s_index_switch = {s_index[i]:i for i in range(0,num_of_sent)}
 
 #Calculate noised matrix for each mechansim.
 
@@ -112,8 +114,8 @@ def main():
         noised_mat_tuple = pool.map(noised_mat_CMAG, parameters)
     return dict(noised_mat_tuple)
 
-#if __name__ == "__main__":
-#    noised_mat_dict["CMAG"] = main()
+if __name__ == "__main__":
+    noised_mat_dict["CMAG"] = main()
 
 #for CMAG(E)
 
@@ -136,8 +138,8 @@ def main():
         noised_mat_tuple = pool.map(noised_mat_CMAG_E, parameters)
     return dict(noised_mat_tuple)
 
-#if __name__ == "__main__":
-#    noised_mat_dict["CMAG(E)"] = main()
+if __name__ == "__main__":
+    noised_mat_dict["CMAG(E)"] = main()
     
 #for MAG    
 
@@ -162,8 +164,8 @@ def main():
         noised_mat_tuple = pool.map(noised_mat_MAG, parameters)
     return dict(noised_mat_tuple)
 
-#if __name__ == "__main__":
-#    noised_mat_dict["MAG"] = main()
+if __name__ == "__main__":
+    noised_mat_dict["MAG"] = main()
     
 #for Mahalanobis
 
@@ -186,8 +188,8 @@ def main():
         noised_mat_tuple = pool.map(noised_mat_Mahalanobis, parameters)
     return dict(noised_mat_tuple)
 
-#if __name__ == "__main__":
-#    noised_mat_dict["Mahalanobis"] = main()
+if __name__ == "__main__":
+    noised_mat_dict["Mahalanobis"] = main()
 
 #for Laplacian    
 
@@ -211,8 +213,8 @@ def main():
         noised_mat_tuple = pool.map(noised_mat_Laplacian, parameters)
     return dict(noised_mat_tuple)
 
-#if __name__ == "__main__":
-#    noised_mat_dict["Laplacian"] = main()
+if __name__ == "__main__":
+    noised_mat_dict["Laplacian"] = main()
     
 #for NADP
 
@@ -245,11 +247,13 @@ def noised_mat_NADP(e):
     res_mat = s_embd_mean + noi_mat
     return res_mat
 
-#matrix = dict()
-#for e in parameters:
-#    print("NADP",e)
-#    matrix[e] = noised_mat_NADP(e)
-#noised_mat_dict["NADP"] = matrix
+matrix = dict()
+
+for e in parameters:
+    print("NADP",e)
+    matrix[e] = noised_mat_NADP(e)
+
+noised_mat_dict["NADP"] = matrix
     
 #for no_noise
 
@@ -260,12 +264,12 @@ noised_mat_dict["no_noise"] = {e:s_embd for e in parameters}
 knd = ["CMAG","MAG","Mahalanobis","Laplacian","CMAG(E)","NADP","no_noise"]
 
 def evaluation(k,e):
-    ev = Eval(k, e, s_index, noised_mat_dict[k][e])
+    ev = Eval(k, e, s_index_switch, noised_mat_dict[k][e])
     ev.evaluation(k,e)
 
-#for k in knd:
-#    for e in parameters:
-#        evaluation(k,e)
+for k in knd:
+    for e in parameters:
+        evaluation(k,e)
 
 #Generate graphs for benchmark experiences.
 
